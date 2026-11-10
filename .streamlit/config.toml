@@ -1,0 +1,14 @@
+# Setari pentru aplicatia publica
+[client]
+showErrorDetails = false   # la o eroare, vizitatorul nu vede codul (doar un mesaj scurt)
+toolbarMode = "viewer"     # meniul Streamlit redus la minimum
+
+[theme]
+base = "dark"
+backgroundColor = "#04070f"
+secondaryBackgroundColor = "#0a1221"
+textColor = "#d5deee"
+primaryColor = "#2f7bff"
+
+[browser]
+gatherUsageStats = false
