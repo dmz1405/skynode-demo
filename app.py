@@ -185,33 +185,63 @@ def logo() -> str:
             f'<div class="zcopy">COPYRIGHT © {date.today().year} BY <span class="dmz">DMZ</span></div></div></div>')
 
 
-def scan_board() -> str:
-    """Panoul de pe Home (in locul radarului): rezultatul ultimei scanari pentru cele 3 companii,
-    verificare cu verificare, plus ultimul document oficial depus de fiecare. Totul din demo.json."""
-    comps = DATA["companies"]
-    head = '<div class="bd-row bd-head"><span>Check</span>' + "".join(
-        f'<span class="bd-tk"><b>{c["ticker"]}</b>{category_tag(c["history"][-1]["category"])}</span>' for c in comps) + "</div>"
-    rows = ""
-    for i, (q, _) in enumerate(comps[0]["history"][-1]["answers"]):
-        cells = ""
-        for c in comps:
-            text, color = ANSWERS[c["history"][-1]["answers"][i][1]]
-            cells += f'<span class="bd-c {color}"><i></i>{text}</span>'
-        rows += f'<div class="bd-row"><span class="bd-q">{QUESTIONS.get(q, q)}</span>{cells}</div>'
-    # verificarea de evaluare foloseste preturi: ramane blocata in demo
-    rows += (f'<div class="bd-row bd-lock"><span class="bd-q">Valuation check</span>'
-             f'<span class="bd-span">{icon("lock", 11)} Full version</span></div>')
-    last = ""
-    for c in comps:
-        n = max(c["news"], key=lambda x: x["day"]) if c["news"] else None
-        last += (f'<span class="bd-f"><b>{html.escape(n.get("form") or "8-K")}</b>{day(n["day"])[:6]}</span>'
-                 if n else '<span class="bd-f">-</span>')
-    rows += f'<div class="bd-row bd-last"><span class="bd-q">Latest filing</span>{last}</div>'
-    return f'<div class="board">{head}{rows}</div>'
-
-
 SEAT_ICON = ('<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.5"/>'
              '<path d="M3 22c0-5 4-8.5 9-8.5s9 3.5 9 8.5z"/></svg>')
+
+
+# etichete scurte pentru matrice (un singur rand fiecare); intrebarile complete raman in profil
+SHORT = {"Creste repede?": "Revenue growth", "Castiga bine din ce vinde?": "Gross margin",
+         "Are bani destui?": "Cash runway", "Sefii cumpara actiuni?": "Insider buying",
+         "Fara semne de pericol?": "Clean filings"}
+GLYPH = {  # semnul din fiecare celula: bifa / liniuta / x (SVG, ca sa fie clare la orice marime)
+    "green": '<path d="M5 12.5l4.2 4.2L19 7"/>',
+    "yellow": '<path d="M6.5 12h11"/>',
+    "red": '<path d="M7 7l10 10M17 7L7 17"/>',
+}
+
+
+def glyph(color: str, label: str = "") -> str:
+    return (f'<span class="vx-g {color}" title="{label}" aria-label="{label}"><svg viewBox="0 0 24 24" fill="none" '
+            f'stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">{GLYPH[color]}</svg></span>')
+
+
+def scan_matrix() -> str:
+    """Matricea de pe Home: cele 3 companii x cele 5 verificari, plus cate au trecut, evaluarea (blocata)
+    si ultimul document depus. Totul din demo.json."""
+    comps = DATA["companies"]
+    last = [c["history"][-1] for c in comps]
+    cells = ['<div class="vx-corner"></div>']
+    for c, h in zip(comps, last):
+        name, color = CATEGORY[h["category"]]
+        cells.append(f'<div class="vx-co"><b>{c["ticker"]}</b><span class="vx-cat {color}">{name}</span></div>')
+    for i, (q, _) in enumerate(last[0]["answers"]):
+        cells.append(f'<div class="vx-l" title="{QUESTIONS.get(q, q)}">{SHORT.get(q, q)}</div>')
+        for h in last:
+            text, color = ANSWERS[h["answers"][i][1]]
+            cells.append(f'<div class="vx-c">{glyph(color, f"{QUESTIONS.get(q, q)} {text}")}</div>')
+    # verificarea de evaluare foloseste preturi: in demo ramane blocata
+    cells.append(f'<div class="vx-l vx-locked">{icon("lock", 11)}Valuation</div>')
+    cells += ['<div class="vx-c"><span class="vx-g vx-blur"></span></div>'] * len(comps)
+    cells.append('<div class="vx-l vx-sum">Passed</div>')
+    for h in last:
+        yes = sum(1 for _, a in h["answers"] if a == "Da")
+        n = len(h["answers"])
+        color = CATEGORY[h["category"]][1]
+        cells.append(f'<div class="vx-c vx-score"><b>{yes}<small>/{n}</small></b>'
+                     f'<i class="vx-bar"><i class="{color}" style="width:{yes / n * 100:.0f}%"></i></i></div>')
+    cells.append('<div class="vx-l">Last filing</div>')
+    for c in comps:
+        f = max(c["news"], key=lambda x: x["day"]) if c["news"] else None
+        cells.append(f'<div class="vx-c vx-file"><b>{html.escape(f.get("form") or "8-K")}</b>{day(f["day"])[:6]}</div>'
+                     if f else '<div class="vx-c vx-file">-</div>')
+    legend = "".join(f'<span>{glyph(col)}{txt}</span>' for txt, col in ANSWERS.values())
+    return ('<div class="vx">'
+            f'<div class="vx-top"><span class="vx-title"><span class="live"></span>Latest scan</span>'
+            f'<span class="vx-date">{day(DATA["updated"])}</span></div>'
+            f'<div class="vx-grid">{"".join(cells)}</div>'
+            f'<div class="vx-foot"><span class="vx-legend">{legend}</span>'
+            f'<span class="vx-seats">{"".join(SEAT_ICON for _ in range(SEATS))}{SEATS} seats on the full version</span></div>'
+            '</div>')
 
 
 def feed_html() -> str:
@@ -240,23 +270,21 @@ st.markdown(f'<div class="demo-band"><span class="pill"><span class="live"></spa
 
 # ---------------------------------------------------------------- Home
 def page_home() -> None:
-    st.markdown('<div class="hero2"><div>'
-                '<div class="k">AI company research · from official filings</div>'
-                '<h1>Every SEC filing, <em>scanned</em>.<br>Every AI company, explained.</h1>'
-                f'<p>{BRAND} continuously scans what newly listed AI companies file with the SEC - financial statements, '
-                'insider trades, ownership and fund-holdings reports, press releases - cross-checks them against each '
-                'other and turns them into a plain-language profile. Every number links back to its official source.</p>'
-                '<div class="hero-tags"><span>10-K / 10-Q</span><span>8-K</span><span>Form 4</span><span>13F</span>'
-                '<span>13D / 13G</span><span>S-3 / 424B</span><span>XBRL</span></div></div>'
-                f'<div class="scanner"><div class="scan-hud"><span><span class="live"></span> Latest scan · <b>SEC EDGAR</b></span>'
-                f'<span>tracked <b>{DATA["tracked"]}</b> / {DATA["universe"]}</span></div>'
-                '<div class="scan-bar"><i></i></div>'
-                f'{scan_board()}'
-                f'<div class="scan-foot"><div><span>Last sweep</span><b>{day(DATA["updated"])}</b></div>'
-                '<div><span>Datasets</span><b>7 SEC</b></div>'
-                '<div><span>Sectors</span><b>8</b></div>'
-                f'<div><span>Full version</span><b><span class="seats">{"".join(SEAT_ICON for _ in range(SEATS))}</span>{SEATS} seats</b></div>'
-                '</div></div></div>', unsafe_allow_html=True)
+    left, right = st.columns([1.22, 1], gap="large", vertical_alignment="center")
+    with left:
+        st.markdown('<div class="hx"><span class="hx-eyebrow">AI company research<i></i>from official SEC filings</span>'
+                    '<h1 class="hx-h">Every SEC filing, <em>scanned</em>.<br>Every AI company, explained.</h1>'
+                    f'<p class="hx-p">{BRAND} reads what newly listed AI companies file with the SEC - financials, '
+                    'insider trades, fund holdings, press releases - and turns it into a plain-language profile. '
+                    'Every number links back to its official source.</p></div>', unsafe_allow_html=True)
+        a, b, _ = st.columns([1.35, 1, .6], gap="small")
+        a.button("Explore the 3 profiles  →", key="cta_main", type="primary", width="stretch",
+                 on_click=go, args=("Companies",))
+        b.button("How it works", key="cta_how", width="stretch", on_click=go, args=("How it works",))
+        st.markdown('<div class="hx-src"><span>Reads</span>10-K<i></i>10-Q<i></i>8-K<i></i>Form 4<i></i>13F<i></i>'
+                    '13D/G<i></i>S-3</div>', unsafe_allow_html=True)
+    with right:
+        st.markdown(scan_matrix(), unsafe_allow_html=True)
     st.markdown(feed_html(), unsafe_allow_html=True)
     stats = [("AI companies identified", f"{DATA['universe']:,}"), ("Tracked daily", f"{DATA['tracked']:,}"),
              ("Official SEC datasets", "7"), ("Open in this demo", "3")]

@@ -70,71 +70,78 @@ TEMA = r"""
 @keyframes live {0% {box-shadow: 0 0 0 0 rgba(31,208,143,.55);} 70% {box-shadow: 0 0 0 8px rgba(31,208,143,0);}
                  100% {box-shadow: 0 0 0 0 rgba(31,208,143,0);}}
 
-/* ---------- prezentarea (hero) cu scanner ---------- */
-.hero2 {display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: 36px; align-items: center;
-        margin: 26px 0 10px 0;}
-@media (max-width: 1000px) {.hero2 {grid-template-columns: 1fr; gap: 18px;}}
-.hero2 .k {font-family: var(--mono); font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
-           color: var(--accent2); display: flex; align-items: center; gap: 10px;}
-.hero2 .k::before {content: ""; width: 26px; height: 1px; background: var(--accent2);}
-.hero2 h1 {font-size: clamp(2rem, 3.6vw, 3.1rem) !important; line-height: 1.08; margin: 14px 0 16px 0 !important;
-           letter-spacing: -.03em; color: var(--strong); padding: 0 !important;}
-.hero2 h1 em {font-style: normal; background: linear-gradient(90deg, #6aa8ff, #2f7bff 60%, #b8d4ff);
-              -webkit-background-clip: text; background-clip: text; color: transparent;}
-.hero2 p {color: var(--soft); font-size: 1.04rem; line-height: 1.7; max-width: 600px; margin: 0;}
-.hero-tags {display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px;}
-.hero-tags span {font-family: var(--mono); font-size: .7rem; color: var(--soft); padding: 5px 10px;
-                 border: 1px solid var(--line2); border-radius: 6px; background: var(--panel);}
-.scanner {position: relative; border: 1px solid var(--line2); border-radius: 16px; padding: 12px 14px;
-          width: 100%; max-width: 440px; justify-self: end;
-          background: radial-gradient(circle at 50% 46%, rgba(47,123,255,.13), transparent 62%), var(--glass);
-          box-shadow: 0 30px 80px -40px rgba(47,123,255,.45), inset 0 1px 0 rgba(255,255,255,.04);}
-@media (max-width: 1000px) {.scanner {justify-self: center;}}
-.scanner::before, .scanner::after {content: ""; position: absolute; width: 14px; height: 14px;
-                                   border: 2px solid var(--accent2); opacity: .7;}
-.scanner::before {left: -1px; top: -1px; border-right: 0; border-bottom: 0; border-radius: 16px 0 0 0;}
-.scanner::after {right: -1px; bottom: -1px; border-left: 0; border-top: 0; border-radius: 0 0 16px 0;}
-.seats svg {display: block;}
-.scan-foot .seats {display: inline-flex; flex-direction: row; gap: 1px; margin: 0; color: var(--up);}
-.scan-hud {display: flex; justify-content: space-between; align-items: center; font-family: var(--mono);
-           font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding: 2px 2px;}
-.scan-hud > span {display: inline-flex; align-items: center; gap: 7px;}
-.scan-hud b {color: var(--accent3); font-weight: 500;}
-.scan-bar {position: relative; height: 2px; margin: 8px 0 2px 0; background: var(--line); border-radius: 2px;
-           overflow: hidden;}
-.scan-bar i {position: absolute; top: 0; bottom: 0; width: 30%; border-radius: 2px;
-             background: linear-gradient(90deg, transparent, var(--accent2), transparent); animation: scanbar 2.8s ease-in-out infinite;}
-@keyframes scanbar {0% {left: -30%;} 100% {left: 100%;}}
-.scan-foot {display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); padding-top: 9px;}
-.scan-foot > div {padding: 0 6px; border-left: 1px solid var(--line);}
-.scan-foot > div:first-child {border-left: 0; padding-left: 2px;}
-.scan-foot span {display: block; font-family: var(--mono); font-size: .56rem; letter-spacing: .12em;
-                 text-transform: uppercase; color: var(--muted);}
-.scan-foot b {display: flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: .76rem;
-              color: var(--strong); font-weight: 500; margin-top: 2px; white-space: nowrap;}
-.seats {display: inline-flex; gap: 1px; color: var(--up);}
-@media (max-width: 480px) {.scan-foot {grid-template-columns: repeat(2, 1fr); row-gap: 8px;}
-                           .scan-foot > div:nth-child(3) {border-left: 0; padding-left: 2px;}}
-/* panoul "Latest scan": verificarile celor 3 companii, rand cu rand */
-.board {margin: 8px 0 10px 0; font-family: var(--mono); font-size: .72rem;}
-.bd-row {display: grid; grid-template-columns: minmax(0, 1.55fr) repeat(3, minmax(0, 1fr)); gap: 6px;
-         align-items: center; padding: 8px 2px; border-bottom: 1px solid var(--line);}
-.bd-row:last-child {border-bottom: 0;}
-.bd-head {padding-top: 2px; color: var(--muted); font-size: .58rem; letter-spacing: .12em; text-transform: uppercase;}
-.bd-tk {display: flex; flex-direction: column; align-items: flex-start; gap: 4px;}
-.bd-tk b {color: var(--strong); font-size: .82rem; letter-spacing: .04em; font-weight: 600;}
-.bd-tk .tag {font-size: .54rem; padding: 1px 6px; letter-spacing: .08em;}
-.bd-q {font-family: 'Inter', sans-serif; color: var(--soft); font-size: .78rem; line-height: 1.25;}
-.bd-c {display: inline-flex; align-items: center; gap: 6px; color: var(--soft); background: none !important;}
-.bd-c i {width: 8px; height: 8px; border-radius: 50%; flex: none; background: var(--line2);}
-.bd-c.green {color: var(--up);} .bd-c.green i {background: var(--up); box-shadow: 0 0 8px rgba(31,208,143,.5);}
-.bd-c.yellow {color: var(--warn);} .bd-c.yellow i {background: var(--warn); box-shadow: 0 0 8px rgba(246,180,69,.45);}
-.bd-c.red {color: var(--down);} .bd-c.red i {background: var(--down); box-shadow: 0 0 8px rgba(255,93,108,.45);}
-.bd-lock .bd-span {grid-column: 2 / 5; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-                   padding: 3px 0; border: 1px dashed var(--line2); border-radius: 6px; color: var(--muted);
-                   font-size: .6rem; letter-spacing: .12em; text-transform: uppercase;}
-.bd-f {color: var(--soft); white-space: nowrap;} .bd-f b {color: var(--accent3); font-weight: 500; margin-right: 6px;}
-@media (max-width: 480px) {.board {font-size: .64rem;} .bd-q {font-size: .7rem;} .bd-row {gap: 4px;}}
+/* ---------- prezentarea (hero) ---------- */
+/* Streamlit pune o iconita de link langa titluri: pe site nu are rost */
+[data-testid="stHeaderActionElements"], .stMarkdown h1 a, .stMarkdown h2 a, .stMarkdown h3 a {display: none !important;}
+.hx {padding: 28px 0 4px 0;}
+.hx-eyebrow {display: inline-flex; align-items: center; gap: 10px; padding: 6px 12px; border-radius: 999px;
+             border: 1px solid var(--line2); background: rgba(10,18,33,.7); font-family: var(--mono); font-size: .68rem;
+             letter-spacing: .1em; text-transform: uppercase; color: var(--accent3);}
+.hx-eyebrow i {width: 3px; height: 3px; border-radius: 50%; background: var(--muted);}
+.hx-h {font-size: clamp(2.1rem, 3.3vw, 2.95rem) !important; text-wrap: balance; line-height: 1.04 !important; letter-spacing: -.035em !important;
+       font-weight: 600 !important; color: var(--strong); margin: 22px 0 18px 0 !important; padding: 0 !important;}
+.hx-h em {font-style: normal; color: var(--accent2);}
+.hx-p {text-wrap: pretty; color: var(--soft); font-size: 1.06rem; line-height: 1.65; max-width: 34em; margin: 0 0 26px 0 !important;}
+.hx-src {display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 18px; font-family: var(--mono);
+         font-size: .7rem; color: var(--muted); letter-spacing: .02em;}
+.hx-src span {color: var(--soft); margin-right: 4px; text-transform: uppercase; letter-spacing: .14em; font-size: .62rem;}
+.hx-src i {width: 3px; height: 3px; border-radius: 50%; background: var(--line2);}
+/* butoanele din hero: cel principal plin, al doilea discret */
+.st-key-cta_main button, .st-key-cta_how button {height: 46px; border-radius: 10px !important; font-weight: 600 !important;
+                                                 font-size: .92rem !important;}
+.st-key-cta_main button {background: var(--accent) !important; border-color: var(--accent) !important; color: #fff !important;
+                         box-shadow: 0 8px 24px -10px rgba(47,123,255,.8) !important;}
+.st-key-cta_main button:hover {background: #4a8dff !important; box-shadow: 0 10px 28px -10px rgba(47,123,255,.95) !important;}
+.st-key-cta_how button {background: transparent !important; color: var(--text) !important;}
+
+/* ---------- matricea "Latest scan" ---------- */
+.vx {border: 1px solid var(--line2); border-radius: 16px; background: linear-gradient(180deg, rgba(14,24,48,.72), rgba(8,14,28,.72));
+     box-shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 40px 80px -48px rgba(0,0,0,.9); overflow: hidden; margin-top: 18px;}
+.vx-top {display: flex; justify-content: space-between; align-items: center; padding: 14px 20px;
+         border-bottom: 1px solid var(--line);}
+.vx-title {display: inline-flex; align-items: center; gap: 9px; font-size: .86rem; font-weight: 600; color: var(--strong);}
+.vx-date {font-family: var(--mono); font-size: .7rem; color: var(--muted);}
+.vx-grid {display: grid; grid-template-columns: minmax(0, 1.25fr) repeat(3, minmax(0, 1fr)); padding: 4px 12px 8px 12px;}
+.vx-grid > div {display: flex; align-items: center; min-height: 40px; padding: 0 8px; border-bottom: 1px solid rgba(21,33,58,.7);}
+.vx-grid > div:nth-last-child(-n+4) {border-bottom: 0;}
+.vx-corner, .vx-co {min-height: 62px !important;}
+.vx-co {flex-direction: column; justify-content: center; align-items: center !important; gap: 6px;}
+.vx-co b {font-family: var(--mono); font-size: .9rem; font-weight: 600; color: var(--strong); letter-spacing: .02em;}
+.vx-cat {font-size: .66rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; letter-spacing: .02em;}
+.vx-cat.green {color: var(--up); background: rgba(31,208,143,.12);}
+.vx-cat.yellow {color: var(--warn); background: rgba(246,180,69,.12);}
+.vx-cat.red {color: var(--down); background: rgba(255,93,108,.12);}
+.vx-l {font-size: .84rem; color: var(--soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.vx-c {justify-content: center;}
+.vx-g {display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 7px;}
+.vx-g svg {width: 14px; height: 14px;}
+.vx-g.green {color: var(--up); background: rgba(31,208,143,.12);}
+.vx-g.yellow {color: var(--warn); background: rgba(246,180,69,.12);}
+.vx-g.red {color: var(--down); background: rgba(255,93,108,.12);}
+.vx-locked {gap: 7px; color: var(--muted) !important;}
+.vx-blur {background: repeating-linear-gradient(135deg, rgba(99,115,143,.18) 0 3px, transparent 3px 6px);
+          border: 1px dashed rgba(99,115,143,.35);}
+.vx-sum {color: var(--strong) !important; font-weight: 600;}
+.vx-score {flex-direction: column; gap: 5px; justify-content: center !important;}
+.vx-score b {font-family: var(--mono); font-size: .92rem; color: var(--strong); font-weight: 600; line-height: 1;}
+.vx-score small {color: var(--muted); font-weight: 400;}
+.vx-bar {display: block; width: 44px; height: 3px; border-radius: 3px; background: var(--line2); overflow: hidden;}
+.vx-bar i {display: block; height: 100%; border-radius: 3px;}
+.vx-bar i.green {background: var(--up);} .vx-bar i.yellow {background: var(--warn);} .vx-bar i.red {background: var(--down);}
+.vx-file {font-family: var(--mono); font-size: .72rem; color: var(--muted); gap: 6px; white-space: nowrap;}
+.vx-file b {color: var(--text); font-weight: 500;}
+.vx-foot {display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+          padding: 12px 20px; border-top: 1px solid var(--line); background: rgba(4,7,15,.35);
+          font-size: .72rem; color: var(--muted);}
+.vx-legend {display: inline-flex; gap: 14px;}
+.vx-legend span {display: inline-flex; align-items: center; gap: 6px;}
+.vx-legend .vx-g {width: 18px; height: 18px; border-radius: 5px;} .vx-legend .vx-g svg {width: 11px; height: 11px;}
+.vx-seats {display: inline-flex; align-items: center; gap: 2px; color: var(--muted);}
+.vx-seats svg {color: var(--up); margin-right: 1px;}
+.vx-seats svg:last-of-type {margin-right: 7px;}
+@media (max-width: 480px) {.hx-eyebrow {font-size: .58rem; letter-spacing: .06em; white-space: nowrap; gap: 7px;}
+                           .vx-grid {padding: 4px 4px 8px 4px;} .vx-grid > div {padding: 0 5px;} .vx-l {font-size: .78rem;}
+                           .vx-top, .vx-foot {padding-left: 14px; padding-right: 14px;}}
 
 /* ---------- banda cu ultimele rapoarte (curge) ---------- */
 .feed {position: relative; overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
