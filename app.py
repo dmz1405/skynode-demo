@@ -11,7 +11,6 @@ Rulare locala:  streamlit run app.py
 """
 import html
 import json
-import math
 import random
 from datetime import date
 from pathlib import Path
@@ -186,110 +185,29 @@ def logo() -> str:
             f'<div class="zcopy">COPYRIGHT © {date.today().year} BY <span class="dmz">DMZ</span></div></div></div>')
 
 
-def scanner_svg() -> str:
-    """Ecranul de scanare de pe Home: globul, fasciculul care se roteste, cele 3 companii detectate,
-    un satelit pe orbita si legaturile dintre noduri. Punctele se aprind exact cand trece fasciculul."""
-    cx = cy = 200
-    period = 7.0          # secunde pentru o rotatie completa a fasciculului
-    lead = 48             # unghiul (in grade, de la nord, in sensul acelor) al marginii luminoase la pornire
-
-    def flash_delay(x: float, y: float) -> str:
-        """Intarzierea (negativa) ca punctul sa se aprinda cand ajunge fasciculul la el."""
-        angle = math.degrees(math.atan2(x - cx, -(y - cy))) % 360
-        return f"{((angle - lead) % 360) / 360 * period - period:.2f}s"
-
-    def polar(r: float, deg: float) -> tuple[float, float]:
-        return cx + r * math.sin(math.radians(deg)), cy - r * math.cos(math.radians(deg))
-
-    ticks = ""
-    for a in range(0, 360, 6):
-        big = a % 30 == 0
-        x1, y1 = polar(182, a); x2, y2 = polar(194 if big else 188, a)
-        ticks += (f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" stroke="#6aa8ff" '
-                  f'stroke-width="{1.4 if big else .8}" opacity="{.8 if big else .35}"/>')
-    labels = "".join(f'<text x="{polar(164, a)[0]:.1f}" y="{polar(164, a)[1] + 3:.1f}" text-anchor="middle" '
-                     f'font-family="JetBrains Mono, monospace" font-size="8" fill="#63738f">{a:03d}</text>'
-                     for a in (0, 90, 180, 270))
-    r = 128
-    meridians = "".join(f'<ellipse cx="{cx}" cy="{cy}" rx="{rx}" ry="{r}" fill="none" stroke="#2f7bff" '
-                        f'stroke-width="1.1" stroke-dasharray="1.5 5" stroke-linecap="round" opacity=".7"/>'
-                        for rx in (24, 64, 98))
-    parallels = "".join(f'<line x1="{cx - math.sqrt(r * r - d * d):.1f}" y1="{cy + d}" x2="{cx + math.sqrt(r * r - d * d):.1f}" '
-                        f'y2="{cy + d}" stroke="#2f7bff" stroke-width="1.1" stroke-dasharray="1.5 5" stroke-linecap="round" '
-                        f'opacity=".7"/>' for d in (-96, -54, 0, 54, 96))
-
-    # fasciculul: 8 felii, din ce in ce mai luminoase spre margine (o "coada" care se stinge)
-    beam = ""
-    for i in range(8):
-        a0, a1 = lead * i / 8, lead * (i + 1) / 8 + .4
-        x0, y0 = polar(172, a0); x1, y1 = polar(172, a1)
-        beam += (f'<path d="M{cx} {cy} L{x0:.1f} {y0:.1f} A172 172 0 0 1 {x1:.1f} {y1:.1f} Z" fill="#4d8fff" '
-                 f'opacity="{.025 + .055 * i:.3f}"/>')
-    ex, ey = polar(172, lead)
-
-    rng = random.Random(42)   # puncte slabe: restul companiilor urmarite (doar decor)
-    dots = ""
-    for _ in range(18):
-        ang, dist = rng.uniform(0, 360), rng.uniform(30, 122)
-        x, y = polar(dist, ang)
-        dots += (f'<circle cx="{x:.1f}" cy="{y:.1f}" r="2" fill="#8fbfff" class="ping-dot" '
-                 f'style="animation-delay:{flash_delay(x, y)}"/>')
-
-    colors = {"green": "#1fd08f", "yellow": "#f6b445", "red": "#ff5d6c"}
-    spots = [(142, 146, -1), (268, 128, 1), (240, 266, 1)]
-    links = "".join(f'<line x1="{a[0]}" y1="{a[1]}" x2="{b[0]}" y2="{b[1]}" class="link"/>'
-                    for a, b in [(spots[0], spots[1]), (spots[1], spots[2]), (spots[2], spots[0])])
-    links += "".join(f'<line x1="{cx}" y1="{cy}" x2="{s[0]}" y2="{s[1]}" class="link link2"/>' for s in spots)
-    hits = ""
-    for (x, y, side), c in zip(spots, DATA["companies"]):
-        name, col = CATEGORY[c["history"][-1]["category"]]
-        hexc = colors[col]
-        lx = x + 16 * side
-        tx = lx + 4 * side
-        anchor = "start" if side > 0 else "end"
-        delay = flash_delay(x, y)
-        hits += (f'<circle cx="{x}" cy="{y}" r="10" fill="none" stroke="{hexc}" stroke-width="1.6" class="ping" '
-                 f'style="animation-delay:{delay}"/>'
-                 f'<circle cx="{x}" cy="{y}" r="7" fill="{hexc}" opacity=".18"/>'
-                 f'<circle cx="{x}" cy="{y}" r="4" fill="{hexc}"/>'
-                 # chenarul de tinta in jurul punctului
-                 f'<path d="M{x - 11} {y - 6}v-5h5M{x + 6} {y - 11}h5v5M{x + 11} {y + 6}v5h-5M{x - 6} {y + 11}h-5v-5" '
-                 f'fill="none" stroke="{hexc}" stroke-width="1.1" opacity=".75"/>'
-                 f'<line x1="{x + 11 * side}" y1="{y - 11}" x2="{lx}" y2="{y - 16}" stroke="{hexc}" stroke-width="1" opacity=".6"/>'
-                 f'<text x="{tx}" y="{y - 19}" text-anchor="{anchor}" font-family="JetBrains Mono, monospace" '
-                 f'font-size="12" font-weight="600" fill="#f2f6fd">{c["ticker"]}</text>'
-                 f'<text x="{tx}" y="{y - 7}" text-anchor="{anchor}" font-family="JetBrains Mono, monospace" '
-                 f'font-size="8.5" letter-spacing="1.4" fill="{hexc}">{name.upper()}</text>')
-
-    # satelitul pe orbita inclinata (nodul SKYNODE)
-    orbit = f"M{cx - 168} {cy} a168 52 0 1 0 336 0 a168 52 0 1 0 -336 0"
-    satellite = (f'<g transform="rotate(-22 {cx} {cy})">'
-                 f'<path d="{orbit}" fill="none" stroke="#6aa8ff" stroke-width=".9" stroke-dasharray="3 5" opacity=".45"/>'
-                 '<g><circle r="9" fill="#6aa8ff" opacity=".18"/><rect x="-3.2" y="-3.2" width="6.4" height="6.4" '
-                 'fill="#ffffff" transform="rotate(45)"/><line x1="-9" y1="0" x2="-4.5" y2="0" stroke="#b8d4ff" stroke-width="1.4"/>'
-                 '<line x1="4.5" y1="0" x2="9" y2="0" stroke="#b8d4ff" stroke-width="1.4"/>'
-                 f'<animateMotion dur="16s" repeatCount="indefinite" path="{orbit}"/></g></g>')
-
-    return (f'<svg viewBox="0 0 400 400" role="img" aria-label="{BRAND} scanning SEC filings">'
-            '<defs><radialGradient id="sc-core" cx=".42" cy=".36" r=".75"><stop offset="0" stop-color="#0f2a5e"/>'
-            '<stop offset=".7" stop-color="#071228"/><stop offset="1" stop-color="#050a16"/></radialGradient>'
-            '<radialGradient id="sc-halo" cx=".5" cy=".5" r=".5"><stop offset=".7" stop-color="#2f7bff" stop-opacity="0"/>'
-            '<stop offset=".86" stop-color="#2f7bff" stop-opacity=".22"/><stop offset="1" stop-color="#2f7bff" stop-opacity="0"/>'
-            '</radialGradient></defs>'
-            f'<circle cx="{cx}" cy="{cy}" r="172" fill="none" stroke="#213152" stroke-width="1" stroke-dasharray="2 6"/>'
-            f'<circle cx="{cx}" cy="{cy}" r="150" fill="none" stroke="#213152" stroke-width="1"/>'
-            f'<circle cx="{cx}" cy="{cy}" r="150" fill="none" stroke="#6aa8ff" stroke-width="1.2" class="range"/>'
-            f'{ticks}{labels}'
-            f'<line x1="{cx - 196}" y1="{cy}" x2="{cx + 196}" y2="{cy}" stroke="#213152" stroke-width="1"/>'
-            f'<line x1="{cx}" y1="{cy - 196}" x2="{cx}" y2="{cy + 196}" stroke="#213152" stroke-width="1"/>'
-            f'<circle cx="{cx}" cy="{cy}" r="{r + 22}" fill="url(#sc-halo)"/>'
-            f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="url(#sc-core)" stroke="#2f7bff" stroke-width="1.6"/>'
-            f'<g transform="rotate(-16 {cx} {cy})">{meridians}{parallels}</g>'
-            f'<g class="sweep sweep-slow"><circle cx="{cx}" cy="{cy}" r="172" fill="none"/>{beam}'
-            f'<line x1="{cx}" y1="{cy}" x2="{ex:.1f}" y2="{ey:.1f}" stroke="#cfe2ff" stroke-width="1.6"/></g>'
-            f'{links}{satellite}{dots}{hits}'
-            f'<circle cx="{cx}" cy="{cy}" r="6" fill="#2f7bff" opacity=".3"/><circle cx="{cx}" cy="{cy}" r="3" fill="#cfe2ff"/>'
-            '</svg>')
+def scan_board() -> str:
+    """Panoul de pe Home (in locul radarului): rezultatul ultimei scanari pentru cele 3 companii,
+    verificare cu verificare, plus ultimul document oficial depus de fiecare. Totul din demo.json."""
+    comps = DATA["companies"]
+    head = '<div class="bd-row bd-head"><span>Check</span>' + "".join(
+        f'<span class="bd-tk"><b>{c["ticker"]}</b>{category_tag(c["history"][-1]["category"])}</span>' for c in comps) + "</div>"
+    rows = ""
+    for i, (q, _) in enumerate(comps[0]["history"][-1]["answers"]):
+        cells = ""
+        for c in comps:
+            text, color = ANSWERS[c["history"][-1]["answers"][i][1]]
+            cells += f'<span class="bd-c {color}"><i></i>{text}</span>'
+        rows += f'<div class="bd-row"><span class="bd-q">{QUESTIONS.get(q, q)}</span>{cells}</div>'
+    # verificarea de evaluare foloseste preturi: ramane blocata in demo
+    rows += (f'<div class="bd-row bd-lock"><span class="bd-q">Valuation check</span>'
+             f'<span class="bd-span">{icon("lock", 11)} Full version</span></div>')
+    last = ""
+    for c in comps:
+        n = max(c["news"], key=lambda x: x["day"]) if c["news"] else None
+        last += (f'<span class="bd-f"><b>{html.escape(n.get("form") or "8-K")}</b>{day(n["day"])[:6]}</span>'
+                 if n else '<span class="bd-f">-</span>')
+    rows += f'<div class="bd-row bd-last"><span class="bd-q">Latest filing</span>{last}</div>'
+    return f'<div class="board">{head}{rows}</div>'
 
 
 SEAT_ICON = ('<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.5"/>'
@@ -312,7 +230,7 @@ st.session_state.setdefault("ticker", DATA["companies"][0]["ticker"])
 head = st.columns([2.2, 1, 1.15, 1.25, 1, 1], gap="small", vertical_alignment="center")
 head[0].markdown(logo(), unsafe_allow_html=True)
 for col, page in zip(head[1:], PAGES):
-    col.button(page, key=f"nav_{page}", use_container_width=True, on_click=go, args=(page,),
+    col.button(page, key=f"nav_{page}", width="stretch", on_click=go, args=(page,),
                type="primary" if st.session_state["page"] == page else "secondary")
 st.markdown('<div class="topbar-line"></div>', unsafe_allow_html=True)
 st.markdown(f'<div class="demo-band"><span class="pill"><span class="live"></span>Public demo</span>'
@@ -330,10 +248,10 @@ def page_home() -> None:
                 'other and turns them into a plain-language profile. Every number links back to its official source.</p>'
                 '<div class="hero-tags"><span>10-K / 10-Q</span><span>8-K</span><span>Form 4</span><span>13F</span>'
                 '<span>13D / 13G</span><span>S-3 / 424B</span><span>XBRL</span></div></div>'
-                f'<div class="scanner"><div class="scan-hud"><span><span class="live"></span> SEC EDGAR · <b>live scan</b></span>'
-                f'<span>targets <b>{DATA["tracked"]}</b> / {DATA["universe"]}</span></div>'
+                f'<div class="scanner"><div class="scan-hud"><span><span class="live"></span> Latest scan · <b>SEC EDGAR</b></span>'
+                f'<span>tracked <b>{DATA["tracked"]}</b> / {DATA["universe"]}</span></div>'
                 '<div class="scan-bar"><i></i></div>'
-                f'{scanner_svg()}'
+                f'{scan_board()}'
                 f'<div class="scan-foot"><div><span>Last sweep</span><b>{day(DATA["updated"])}</b></div>'
                 '<div><span>Datasets</span><b>7 SEC</b></div>'
                 '<div><span>Sectors</span><b>8</b></div>'
@@ -368,7 +286,7 @@ def page_home() -> None:
                         f'<div class="cc-fig"><div><span>Revenue</span><b>{money(f.get("revenue_ttm"))}</b></div>'
                         f'<div><span>Growth</span><b>{pct(f.get("revenue_growth"))}</b></div>'
                         f'<div><span>Runway</span><b>{runway}</b></div></div></div>', unsafe_allow_html=True)
-            st.button("Open profile", key=f"open_{c['ticker']}", use_container_width=True,
+            st.button("Open profile", key=f"open_{c['ticker']}", width="stretch",
                       on_click=go, args=("Companies", c["ticker"]))
 
     section("In the full version", "Available in the private app.")
@@ -490,7 +408,7 @@ def page_company() -> None:
     st.altair_chart(alt.Chart(hist).mark_line(point=True, color="#6aa8ff", interpolate="step-after").encode(
         x=alt.X("day:T", title=None), y=alt.Y("category:N", title=None, sort=names, scale=alt.Scale(domain=names)),
         tooltip=[alt.Tooltip("day:T", title="Date", format="%b %d, %Y"), alt.Tooltip("category:N", title="Financial health")]
-    ).properties(height=180, background="transparent"), use_container_width=True)
+    ).properties(height=180, background="transparent"), width="stretch")
 
     a, b = st.columns(2, gap="large")
     with a:

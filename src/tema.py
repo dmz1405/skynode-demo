@@ -43,7 +43,6 @@ TEMA = r"""
 @media (max-width: 640px) {.zlogo {padding-bottom: 18px !important;}}
 .stats + div, .stats {margin-bottom: 16px;}
 .sweep {transform-origin: 50% 50%; transform-box: fill-box; animation: sweep 4s linear infinite;}
-.sweep-slow {animation-duration: 7s;}
 @keyframes sweep {to {transform: rotate(360deg);}}
 
 /* ---------- meniul de sus ---------- */
@@ -95,7 +94,6 @@ TEMA = r"""
                                    border: 2px solid var(--accent2); opacity: .7;}
 .scanner::before {left: -1px; top: -1px; border-right: 0; border-bottom: 0; border-radius: 16px 0 0 0;}
 .scanner::after {right: -1px; bottom: -1px; border-left: 0; border-top: 0; border-radius: 0 0 16px 0;}
-.scanner > svg {display: block; width: 100%; height: auto; max-height: 340px; margin: 4px 0;}
 .seats svg {display: block;}
 .scan-foot .seats {display: inline-flex; flex-direction: row; gap: 1px; margin: 0; color: var(--up);}
 .scan-hud {display: flex; justify-content: space-between; align-items: center; font-family: var(--mono);
@@ -117,16 +115,26 @@ TEMA = r"""
 .seats {display: inline-flex; gap: 1px; color: var(--up);}
 @media (max-width: 480px) {.scan-foot {grid-template-columns: repeat(2, 1fr); row-gap: 8px;}
                            .scan-foot > div:nth-child(3) {border-left: 0; padding-left: 2px;}}
-/* punctele se aprind cand trece fasciculul (aceeasi perioada: 7 s) */
-.ping {animation: ping 7s ease-out infinite; transform-origin: center; transform-box: fill-box; opacity: 0;}
-@keyframes ping {0% {opacity: 1; transform: scale(.5);} 22% {opacity: 0; transform: scale(2.6);} 100% {opacity: 0;}}
-.ping-dot {animation: pingdot 7s ease-out infinite; opacity: .25;}
-@keyframes pingdot {0% {opacity: 1;} 35%, 100% {opacity: .22;}}
-.link {stroke: #6aa8ff; stroke-width: .9; stroke-dasharray: 3 5; opacity: .45; animation: flow 3s linear infinite;}
-.link2 {opacity: .18;}
-@keyframes flow {to {stroke-dashoffset: -32;}}
-.range {stroke-dasharray: 60 882; animation: range 9s linear infinite; opacity: .55;}
-@keyframes range {to {stroke-dashoffset: -942;}}
+/* panoul "Latest scan": verificarile celor 3 companii, rand cu rand */
+.board {margin: 8px 0 10px 0; font-family: var(--mono); font-size: .72rem;}
+.bd-row {display: grid; grid-template-columns: minmax(0, 1.55fr) repeat(3, minmax(0, 1fr)); gap: 6px;
+         align-items: center; padding: 8px 2px; border-bottom: 1px solid var(--line);}
+.bd-row:last-child {border-bottom: 0;}
+.bd-head {padding-top: 2px; color: var(--muted); font-size: .58rem; letter-spacing: .12em; text-transform: uppercase;}
+.bd-tk {display: flex; flex-direction: column; align-items: flex-start; gap: 4px;}
+.bd-tk b {color: var(--strong); font-size: .82rem; letter-spacing: .04em; font-weight: 600;}
+.bd-tk .tag {font-size: .54rem; padding: 1px 6px; letter-spacing: .08em;}
+.bd-q {font-family: 'Inter', sans-serif; color: var(--soft); font-size: .78rem; line-height: 1.25;}
+.bd-c {display: inline-flex; align-items: center; gap: 6px; color: var(--soft); background: none !important;}
+.bd-c i {width: 8px; height: 8px; border-radius: 50%; flex: none; background: var(--line2);}
+.bd-c.green {color: var(--up);} .bd-c.green i {background: var(--up); box-shadow: 0 0 8px rgba(31,208,143,.5);}
+.bd-c.yellow {color: var(--warn);} .bd-c.yellow i {background: var(--warn); box-shadow: 0 0 8px rgba(246,180,69,.45);}
+.bd-c.red {color: var(--down);} .bd-c.red i {background: var(--down); box-shadow: 0 0 8px rgba(255,93,108,.45);}
+.bd-lock .bd-span {grid-column: 2 / 5; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+                   padding: 3px 0; border: 1px dashed var(--line2); border-radius: 6px; color: var(--muted);
+                   font-size: .6rem; letter-spacing: .12em; text-transform: uppercase;}
+.bd-f {color: var(--soft); white-space: nowrap;} .bd-f b {color: var(--accent3); font-weight: 500; margin-right: 6px;}
+@media (max-width: 480px) {.board {font-size: .64rem;} .bd-q {font-size: .7rem;} .bd-row {gap: 4px;}}
 
 /* ---------- banda cu ultimele rapoarte (curge) ---------- */
 .feed {position: relative; overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);

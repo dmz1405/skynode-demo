@@ -1,72 +1,90 @@
 {
- "updated": "2026-11-10",
- "tracked": 64,
+ "updated": "2026-11-12",
+ "tracked": 65,
  "universe": 101,
  "companies": [
   {
-   "ticker": "CARL",
-   "name": "CARLSMED, INC.",
-   "sector": "medtech_ai",
-   "exchange": "Nasdaq",
+   "ticker": "AMBQ",
+   "name": "Ambiq Micro, Inc.",
+   "sector": "cipuri",
+   "exchange": "NYSE",
    "listing_type": "IPO",
-   "listing_date": "2025-07-24",
-   "summary_en": "We are a commercial-stage medical technology company pioneering AI-enabled personalized spine surgery solutions with a focus on becoming the standard of care for spine fusion surgery. Our mission is to improve outcomes and decrease the cost of healthcare for spine surgery and beyond. The aprevo Technology Platform was designed to address the limitations of traditional lumbar and cervical spine fusion surgery, aiming to optimize patient outcomes and reduce the need for revision surgeries. 2 Our technology is powered by AI-enabled, outcome-based algorithms that provide personalized surgical plans for spine fusion.",
+   "listing_date": "2025-07-31",
+   "summary_en": "We are a pioneer and leading provider of ultra-low power semiconductor solutions designed to address the significant power consumption challenges of general purpose and AI compute – especially at the edge. Our customers rely on Ambiq to deliver AI compute closer to end users (edge environments) where power consumption challenges are the most severe. Our leading position is built upon our hardware and software innovations that deliver two to five times lower power consumption than traditional semiconductor designs.",
    "description": {
     "en": [
-     "Creates personalized spine implants for each patient, using AI to plan the surgery.",
-     "Customers: US hospitals and spine surgeons."
+     "Designs ultra-low-power chips for small AI devices (watches, bands, glasses, sensors).",
+     "Customers: makers of wearables and smart devices."
     ]
    },
    "fundamentals": [
     {
-     "filed": "2025-08-28",
+     "filed": "2025-09-04",
      "revenue_ttm": null,
-     "revenue_growth": 0.9944479269275543,
-     "gross_margin": 0.7410650143678161,
+     "revenue_growth": -0.05236591280807623,
+     "gross_margin": 0.46299657789019494,
      "operating_cash_flow": null,
-     "runway_months": 13.041355115102359,
+     "runway_months": 26.664101361565827,
      "self_funded": 0
     },
     {
      "filed": "2025-11-06",
      "revenue_ttm": null,
-     "revenue_growth": 0.990538942388917,
-     "gross_margin": 0.7478073898036552,
+     "revenue_growth": -0.07102354292276769,
+     "gross_margin": 0.44883136951902647,
      "operating_cash_flow": null,
-     "runway_months": 43.63733246711639,
+     "runway_months": 84.14328818129293,
      "self_funded": 0
     },
     {
-     "filed": "2026-02-25",
-     "revenue_ttm": 50511000.0,
-     "revenue_growth": 0.8594146880176698,
-     "gross_margin": 0.7531032844330938,
-     "operating_cash_flow": -28977000.0,
-     "runway_months": 45.467646754322395,
+     "filed": "2026-03-05",
+     "revenue_ttm": 72514000.0,
+     "revenue_growth": -0.046708822485440504,
+     "gross_margin": 0.44260418677772567,
+     "operating_cash_flow": -19690000.0,
+     "runway_months": 85.49009649568309,
      "self_funded": 0
     },
     {
-     "filed": "2026-05-05",
-     "revenue_ttm": 56438000.0,
-     "revenue_growth": 0.5817057611149279,
-     "gross_margin": 0.7588681384882526,
-     "operating_cash_flow": -33829000.0,
-     "runway_months": 34.41402347098643,
+     "filed": "2026-05-12",
+     "revenue_ttm": 81842000.0,
+     "revenue_growth": 0.592931604373252,
+     "gross_margin": 0.4227291610664451,
+     "operating_cash_flow": -32269000.0,
+     "runway_months": 76.06123524125321,
      "self_funded": 0
     },
     {
-     "filed": "2026-08-05",
-     "revenue_ttm": 63295000.0,
-     "revenue_growth": 0.6539064541416253,
-     "gross_margin": 0.7662848566237459,
-     "operating_cash_flow": -34145000.0,
-     "runway_months": 24.686718406794554,
+     "filed": "2026-06-22",
+     "revenue_ttm": 81842000.0,
+     "revenue_growth": 0.592931604373252,
+     "gross_margin": 0.4227291610664451,
+     "operating_cash_flow": -32269000.0,
+     "runway_months": 76.06123524125321,
+     "self_funded": 0
+    },
+    {
+     "filed": "2026-08-11",
+     "revenue_ttm": 97870000.0,
+     "revenue_growth": 0.3188249562053631,
+     "gross_margin": 0.4362317359762951,
+     "operating_cash_flow": -29819000.0,
+     "runway_months": 147.60012072839464,
+     "self_funded": 0
+    },
+    {
+     "filed": "2026-11-10",
+     "revenue_ttm": 117843000.0,
+     "revenue_growth": 0.6342342842086286,
+     "gross_margin": 0.44839320112352876,
+     "operating_cash_flow": -29495000.0,
+     "runway_months": 147.86994405831499,
      "self_funded": 0
     }
    ],
    "history": [
     {
-     "day": "2025-08-01",
+     "day": "2025-09-01",
      "category": "Riscanta",
      "answers": [
       [
@@ -93,39 +111,12 @@
      "alarms": []
     },
     {
-     "day": "2025-09-01",
-     "category": "De urmarit",
-     "answers": [
-      [
-       "Creste repede?",
-       "Da"
-      ],
-      [
-       "Castiga bine din ce vinde?",
-       "Da"
-      ],
-      [
-       "Are bani destui?",
-       "Partial"
-      ],
-      [
-       "Sefii cumpara actiuni?",
-       "Nu"
-      ],
-      [
-       "Fara semne de pericol?",
-       "Da"
-      ]
-     ],
-     "alarms": []
-    },
-    {
      "day": "2025-10-01",
      "category": "De urmarit",
      "answers": [
       [
        "Creste repede?",
-       "Da"
+       "Nu"
       ],
       [
        "Castiga bine din ce vinde?",
@@ -133,7 +124,7 @@
       ],
       [
        "Are bani destui?",
-       "Partial"
+       "Da"
       ],
       [
        "Sefii cumpara actiuni?",
@@ -152,7 +143,7 @@
      "answers": [
       [
        "Creste repede?",
-       "Da"
+       "Nu"
       ],
       [
        "Castiga bine din ce vinde?",
@@ -160,7 +151,7 @@
       ],
       [
        "Are bani destui?",
-       "Partial"
+       "Da"
       ],
       [
        "Sefii cumpara actiuni?",
@@ -175,11 +166,11 @@
     },
     {
      "day": "2025-12-01",
-     "category": "Puternica",
+     "category": "De urmarit",
      "answers": [
       [
        "Creste repede?",
-       "Da"
+       "Nu"
       ],
       [
        "Castiga bine din ce vinde?",
@@ -202,11 +193,11 @@
     },
     {
      "day": "2026-01-01",
-     "category": "Puternica",
+     "category": "De urmarit",
      "answers": [
       [
        "Creste repede?",
-       "Da"
+       "Nu"
       ],
       [
        "Castiga bine din ce vinde?",
@@ -229,11 +220,11 @@
     },
     {
      "day": "2026-02-01",
-     "category": "Puternica",
+     "category": "De urmarit",
      "answers": [
       [
        "Creste repede?",
-       "Da"
+       "Nu"
       ],
       [
        "Castiga bine din ce vinde?",
@@ -256,11 +247,11 @@
     },
     {
      "day": "2026-03-01",
-     "category": "Puternica",
+     "category": "De urmarit",
      "answers": [
       [
        "Creste repede?",
-       "Da"
+       "Nu"
       ],
       [
        "Castiga bine din ce vinde?",
@@ -283,11 +274,11 @@
     },
     {
      "day": "2026-04-01",
-     "category": "Puternica",
+     "category": "De urmarit",
      "answers": [
       [
        "Creste repede?",
-       "Da"
+       "Nu"
       ],
       [
        "Castiga bine din ce vinde?",
@@ -310,11 +301,11 @@
     },
     {
      "day": "2026-05-01",
-     "category": "Puternica",
+     "category": "De urmarit",
      "answers": [
       [
        "Creste repede?",
-       "Da"
+       "Nu"
       ],
       [
        "Castiga bine din ce vinde?",
@@ -498,7 +489,7 @@
      "alarms": []
     },
     {
-     "day": "2026-11-06",
+     "day": "2026-11-11",
      "category": "Puternica",
      "answers": [
       [
@@ -532,122 +523,137 @@
      "value": 0
     },
     "sales": {
-     "transactions": 1,
-     "people": 1,
-     "value": 2629889
+     "transactions": 31,
+     "people": 8,
+     "value": 22941812
     }
    },
-   "people_count": 12,
+   "people_count": 10,
    "events": [
     {
-     "day": "2026-01-20",
+     "day": "2026-06-22",
+     "kind": "emisiune"
+    },
+    {
+     "day": "2026-01-27",
      "kind": "lockup"
+    },
+    {
+     "day": "2026-01-21",
+     "kind": "emisiune"
     }
    ],
    "holders": [
     {
-     "holder": "B Capital Global Growth III, L.P. / B Capital Healthcare I, L.P. / B CAPITAL GROUP MANAGEMENT, L.P. and others",
-     "percent": 27.8,
+     "holder": "Kleiner Perkins Caufield &amp; Byers XVI, LLC / KPCB XVI Founders Fund, LLC / KPCB XVI Associates, LLC and others",
+     "percent": 8.2,
      "form": "SCHEDULE 13G",
-     "filed": "2025-11-14"
+     "filed": "2025-11-03"
     },
     {
-     "holder": "U.S. Venture Partners XII, L.P. / Presidio Management Group XII, L.L.C. and others",
-     "percent": 22.0,
-     "form": "SCHEDULE 13G",
-     "filed": "2025-11-13"
+     "holder": "BlackRock, Inc.",
+     "percent": 6.7,
+     "form": "SCHEDULE 13G/A",
+     "filed": "2026-10-27"
     },
     {
-     "holder": "Individual investor",
-     "percent": 5.9,
-     "form": "SCHEDULE 13G",
-     "filed": "2025-07-24"
+     "holder": "T. Rowe Price Investment Management, Inc.",
+     "percent": 4.3,
+     "form": "SCHEDULE 13G/A",
+     "filed": "2026-08-14"
     }
    ],
    "funds": {
     "periods": [
      {
-      "n": 77
+      "n": 185
      },
      {
-      "n": 65
+      "n": 96
      }
     ],
     "top": [
      {
-      "manager": "Jupiter Topco LLC",
-      "shares": 1251616.0
-     },
-     {
-      "manager": "Parkman Healthcare Partners LLC",
-      "shares": 597318.0
+      "manager": "MANUFACTURERS LIFE INSURANCE COMPANY, THE",
+      "shares": 10302563.0
      },
      {
       "manager": "BlackRock, Inc.",
-      "shares": 532593.0
+      "shares": 1380623.0
      },
      {
-      "manager": "KCM Capital Inc",
-      "shares": 440000.0
+      "manager": "T. Rowe Price Investment Management, Inc.",
+      "shares": 1006359.0
      },
      {
-      "manager": "Pier Capital, LLC",
-      "shares": 373677.0
+      "manager": "D. E. Shaw & Co., Inc.",
+      "shares": 983916.0
+     },
+     {
+      "manager": "Atreides Management, LP",
+      "shares": 877123.0
      }
     ]
    },
    "news": [
     {
-     "day": "2026-09-30",
-     "form": "8-K",
-     "items": "management change; investor presentation / update",
-     "title": "Carlsmed Appoints a new Chief Financial Officer Company Reaffirms Fiscal Year 2026 Guidance",
-     "url": "https://www.sec.gov/Archives/edgar/data/1794546/000179454626000020/carl-ex99_1.htm"
-    },
-    {
-     "day": "2026-09-08",
-     "form": "8-K",
-     "items": "management change; investor presentation / update",
-     "title": "Carlsmed, Inc. Announces Chief Operating Officer Appointment",
-     "url": "https://www.sec.gov/Archives/edgar/data/1794546/000179454626000018/carl-ex99_1.htm"
-    },
-    {
-     "day": "2026-08-05",
+     "day": "2026-11-10",
      "form": "8-K",
      "items": "published financial results",
-     "title": "Carlsmed ® Reports Second Quarter 2026 Financial Results and Raises Full-Year Guidance Second quarter 2026 revenue of $18.9 million, representing 57% growth year-over-year Full year 2026 revenue…",
-     "url": "https://www.sec.gov/Archives/edgar/data/1794546/000179454626000015/carl-ex99_1.htm"
+     "title": "Ambiq Reports Third Quarter 2026 Financial Results Third quarter net sales increased 110% year-over-year on broad demand across customers, product families and form factors Gross profit more than…",
+     "url": "https://www.sec.gov/Archives/edgar/data/1500412/000119312526454445/ambq-ex99_1.htm"
     },
     {
-     "day": "2026-06-03",
+     "day": "2026-08-11",
+     "form": "8-K",
+     "items": "published financial results",
+     "title": "Ambiq Reports Second Quarter 2026 Financial Results Delivered record quarterly net sales, increasing approximately 90% year-over-year, driven by strong demand for edge AI solutions Gross profit more…",
+     "url": "https://www.sec.gov/Archives/edgar/data/1500412/000119312526343443/ambq-ex99_1.htm"
+    },
+    {
+     "day": "2026-07-30",
+     "form": "8-K",
+     "items": "investor presentation / update",
+     "title": "A Reflection of Ambiq’s First Year as a Public Company",
+     "url": "https://www.sec.gov/Archives/edgar/data/1500412/000119312526325025/d88803dex991.htm"
+    },
+    {
+     "day": "2026-06-08",
      "form": "8-K",
      "items": "shareholder vote (general meeting)",
      "title": "shareholder vote (general meeting)",
-     "url": "https://www.sec.gov/Archives/edgar/data/1794546/000119312526255404/carl-20260603.htm"
+     "url": "https://www.sec.gov/Archives/edgar/data/1500412/000119312526261248/ambq-20260608.htm"
     },
     {
-     "day": "2026-05-05",
+     "day": "2026-05-12",
      "form": "8-K",
      "items": "published financial results",
-     "title": "Carlsmed ® Reports First Quarter 2026 Financial Results First quarter 2026 revenue of $16.1 million, representing 58% growth year-over-year Full year 2026 revenue guidance raised to $72 million to…",
-     "url": "https://www.sec.gov/Archives/edgar/data/1794546/000179454626000010/carl-ex99_1.htm"
+     "title": "Ambiq Reports First Quarter 2026 Financial Results First quarter net sales exceeded guidance, increasing 59.3% year-over-year on expanding demand for edge AI GAAP gross margin was 43.5%; non-GAAP…",
+     "url": "https://www.sec.gov/Archives/edgar/data/1500412/000119312526218189/ambq-ex99_1.htm"
     },
     {
-     "day": "2026-02-25",
+     "day": "2026-03-05",
      "form": "8-K",
      "items": "published financial results",
-     "title": "Carlsmed ® Reports Fourth Quarter and Full Year 2025 Financial Results Fourth quarter revenue of $15.2 million; 61% growth YoY Full year revenue of $50.5 million; 86% growth YoY",
-     "url": "https://www.sec.gov/Archives/edgar/data/1794546/000119312526071512/carl-ex99_1.htm"
+     "title": "Ambiq Reports Fourth Quarter and Full Year 2025 Financial Results Full Year 2025 net sales of $72.5 million, with sequential growth in net sales in every quarter of the year Fourth quarter net sales…",
+     "url": "https://www.sec.gov/Archives/edgar/data/1500412/000119312526092653/ambq-ex99_1.htm"
     },
     {
-     "day": "2026-01-12",
+     "day": "2026-01-21",
      "form": "8-K",
      "items": "published financial results",
-     "title": "Carlsmed Announces Preliminary Revenue for the Fourth Quarter and Full Year 2025 Fourth quarter 2025 revenue of ~$15.2 million, representing ~61% growth over Q4 2024 2025 revenue of ~$50.5 million;…",
-     "url": "https://www.sec.gov/Archives/edgar/data/1794546/000119312526009828/carl-ex99_1.htm"
+     "title": "published financial results",
+     "url": "https://www.sec.gov/Archives/edgar/data/1500412/000119312526017259/d937767d8k.htm"
+    },
+    {
+     "day": "2026-01-08",
+     "form": "8-K",
+     "items": "management change",
+     "title": "management change",
+     "url": "https://www.sec.gov/Archives/edgar/data/1500412/000119312526007673/d60304d8k.htm"
     }
    ],
-   "sec_url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=1794546&owner=include&count=40"
+   "sec_url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=1500412&owner=include&count=40"
   },
   {
    "ticker": "ETOR",
@@ -703,7 +709,7 @@
      "alarms": []
     },
     {
-     "day": "2026-11-06",
+     "day": "2026-11-11",
      "category": "De urmarit",
      "answers": [
       [
@@ -832,6 +838,13 @@
     ]
    },
    "news": [
+    {
+     "day": "2026-11-10",
+     "form": "6-K",
+     "items": "",
+     "title": "ETORO REPORTS THIRD QUARTER 2026 RESULTS Funded accounts grew by 18% year-over-year to 4.39 million Announced $250 million share repurchase program New York – November 10 th , 2026 – etoro Group Ltd.…",
+     "url": "https://www.sec.gov/Archives/edgar/data/1493318/000121390026117735/ea031164001ex99-1.htm"
+    },
     {
      "day": "2026-08-11",
      "form": "6-K",
@@ -1450,7 +1463,7 @@
      ]
     },
     {
-     "day": "2026-11-06",
+     "day": "2026-11-11",
      "category": "Riscanta",
      "answers": [
       [
@@ -1563,6 +1576,13 @@
     ]
    },
    "news": [
+    {
+     "day": "2026-11-12",
+     "form": "8-K",
+     "items": "published financial results",
+     "title": "AIRO Reports Third Quarter 2026 Results MCLEAN, Va. - AIRO Group Holdings, Inc. (NASDAQ: AIRO) (“AIRO” or the “Company”), a global leader in advanced aerospace and defense technologies, today…",
+     "url": "https://www.sec.gov/Archives/edgar/data/1927958/000149315226051150/ex99-1.htm"
+    },
     {
      "day": "2026-08-13",
      "form": "8-K",
